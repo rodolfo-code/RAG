@@ -1,0 +1,91 @@
+/seu-projeto-rag-ddd
+│
+├── src/
+│   │
+│   ├── domain/                 # Camada de Domínio: O coração da lógica de negócio
+│   │   ├── __init__.py
+│   │   ├── models/             # Entidades, Value Objects, Agregados (ex: Document, Query, Answer, EvaluationResult)
+│   │   │   ├── __init__.py
+│   │   │   ├── common/           # Value Objects comuns (ex: EmbeddingVector)
+│   │   │   ├── document.py
+│   │   │   ├── interaction.py    # (ex: Query, Answer, Context)
+│   │   │   └── evaluation.py     # (ex: EvaluationRun, Metric)
+│   │   │
+│   │   ├── services/           # Serviços de Domínio (lógica que não pertence a uma entidade específica)
+│   │   │   ├── __init__.py
+│   │   │   ├── indexing_logic.py   # Lógica central de como indexar
+│   │   │   ├── retrieval_logic.py  # Lógica central de como buscar/ranquear
+│   │   │   ├── generation_logic.py # Lógica central de como gerar resposta
+│   │   │   └── evaluation_logic.py # Lógica central de como calcular métricas
+│   │   │
+│   │   └── repositories/       # Interfaces dos Repositórios (contratos para acesso a dados)
+│   │       ├── __init__.py
+│   │       ├── document_repository.py      # Interface para buscar/salvar documentos processados
+│   │       ├── vector_store_repository.py  # Interface para interagir com o vector store
+│   │       └── evaluation_repository.py    # Interface para salvar/buscar resultados de avaliação
+│   │
+│   ├── application/            # Camada de Aplicação: Orquestra os casos de uso
+│   │   ├── __init__.py
+│   │   ├── services/           # Serviços de Aplicação (Casos de Uso)
+│   │   │   ├── __init__.py
+│   │   │   ├── rag_service.py      # Caso de uso: Processar uma query do usuário
+│   │   │   ├── ingestion_service.py  # Caso de uso: Ingerir e indexar novos documentos
+│   │   │   └── evaluation_service.py # Caso de uso: Executar uma suíte de avaliação
+│   │   │
+│   │   └── dto/                # Data Transfer Objects (objetos para transferir dados entre camadas)
+│   │       ├── __init__.py
+│   │       ├── query_dto.py
+│   │       ├── answer_dto.py
+│   │       └── evaluation_dto.py
+│   │
+│   ├── infrastructure/         # Camada de Infraestrutura: Detalhes técnicos (BDs, APIs externas, libs)
+│   │   ├── __init__.py
+│   │   ├── persistence/        # Implementações concretas dos Repositórios
+│   │   │   ├── __init__.py
+│   │   │   ├── vector_stores/    # Implementação p/ ChromaDB, FAISS, etc.
+│   │   │   └── database/         # Implementação p/ BD relacional (ex: resultados de avaliação)
+│   │   │
+│   │   ├── external_services/  # Clientes para LLMs, modelos de embedding, etc.
+│   │   │   ├── __init__.py
+│   │   │   ├── llm_client.py
+│   │   │   └── embedding_client.py
+│   │   │
+│   │   ├── evaluation_tools/   # Adapters para bibliotecas como RAGAS, DeepEval
+│   │   │   ├── __init__.py
+│   │   │   ├── ragas_adapter.py
+│   │   │   └── deepeval_adapter.py
+│   │   │
+│   │   └── configuration/      # Leitura e gerenciamento de configurações (ex: .env)
+│   │       └── __init__.py
+│   │
+│   └── interfaces/             # Camada de Interface: Pontos de entrada (API, CLI)
+│       ├── __init__.py
+│       ├── api/                # Implementação da API (FastAPI/Flask)
+│       │   ├── __init__.py
+│       │   ├── main.py           # Ponto de entrada da aplicação API
+│       │   ├── routers/          # Definição das rotas/endpoints
+│       │   ├── schemas/          # Schemas de validação da API (Pydantic)
+│       │   └── dependencies.py   # Gestão de dependências da API
+│       │
+│       └── cli/                # Opcional: Interface de Linha de Comando
+│           └── __init__.py
+│
+├── data/                     # Dados brutos, processados, índices (mesma estrutura anterior)
+│   ├── raw/
+│   ├── processed/
+│   └── vector_store/
+│
+├── notebooks/                # Jupyter notebooks (mesma estrutura anterior)
+│
+├── tests/                    # Testes (idealmente espelhando a estrutura do src)
+│   ├── domain/
+│   ├── application/
+│   ├── infrastructure/
+│   └── integration/
+│
+├── scripts/                  # Scripts auxiliares (mesma estrutura anterior)
+│
+├── .env
+├── .gitignore
+├── requirements.txt
+└── README.md
