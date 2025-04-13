@@ -1,1 +1,3 @@
-from src.domain.models import Document, Query, Answer, EvaluationResult 
+from .document import Document
+
+__all__ = ['Document']

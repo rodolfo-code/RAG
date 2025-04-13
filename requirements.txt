@@ -6,14 +6,16 @@
 fastapi==0.115.11
 uvicorn==0.34.0
 python-dotenv==1.0.1
-pymupdf==1.23.25
+pymupdf==1.24.11 --only-binary pymupdf
 langchain==0.3.20
+pydantic-settings>=2.4.0,<3.0.0 
 
 psycopg2-binary==2.9.10
-python-dotenv sqlalchemy
-
+python-dotenv==1.0.1
+python-multipart==0.0.6
 
 # Instalar bibliotecas para processamento de documentos
 unstructured
 pypdf
+
 sentence-transformers==3.4.1

@@ -3,11 +3,12 @@ from datetime import datetime
 from typing import Dict, List, Optional, Union, Any
 from uuid import UUID, uuid4
 
+@dataclass
 class Document:
     """
     Entidade que representa um documento completo no sistema.
     """	
-    id: Optional[int] = None
+    id: UUID = field(default_factory=uuid4)
     name: str = ""
     file_type: str = ""
     content: bytes = field(default_factory=bytes)
